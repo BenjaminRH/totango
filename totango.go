@@ -80,6 +80,10 @@ func (t *Tracker) Track(accountID, accountName, userName, activity, module strin
 }
 
 func (t *Tracker) TrackAttribute(accountID, userName, name, value string) (*http.Response, error) {
+	if accountID == "" {
+		return nil, errors.New("An account ID is required to track an attribute")
+	}
+
 	r := &request{
 		accountID:  accountID,
 		userName:   userName,
@@ -90,6 +94,10 @@ func (t *Tracker) TrackAttribute(accountID, userName, name, value string) (*http
 }
 
 func (t *Tracker) TrackAttributes(accountID, userName string, attributes map[string]string) (*http.Response, error) {
+	if accountID == "" {
+		return nil, errors.New("An account ID is required to track attributes")
+	}
+
 	r := &request{
 		accountID:  accountID,
 		userName:   userName,
