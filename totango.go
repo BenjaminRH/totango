@@ -33,14 +33,19 @@ func (r *request) String() string {
 	switch {
 	case r.accountID != "":
 		url += "&sdr_o=" + encode(r.accountID)
+		fallthrough
 	case r.accountName != "":
 		url += "&sdr_odn=" + encode(r.accountName)
+		fallthrough
 	case r.userName != "":
 		url += "&sdr_u=" + encode(r.userName)
+		fallthrough
 	case r.activity != "":
 		url += "&sdr_a=" + encode(r.activity)
+		fallthrough
 	case r.module != "":
 		url += "&sdr_m=" + encode(r.module)
+		fallthrough
 	case len(r.attributes) > 0:
 		for name, val := range r.attributes {
 			url += "&sdr_o." + encode(name) + "=" + encode(val)
