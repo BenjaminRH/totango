@@ -50,26 +50,24 @@ func (r *request) String() string {
 	return url
 }
 
-// A tracker class for the API
-type tracker struct {
+type Tracker struct {
 	ServiceID string
 }
 
 // Construct a Totango API request from a request type
-func (t *tracker) getURL(r *request) string {
+func (t *Tracker) getURL(r *request) string {
 	return baseURL + t.ServiceID + r.String()
 }
 
-// Returns a new tracker
-func NewTracker(serviceID string) (*tracker, error) {
+func NewTracker(serviceID string) (*Tracker, error) {
 	if serviceID == "" {
 		return nil, errors.New("Tracker requires a valid Totango Service ID")
 	}
 
-	return &tracker{ServiceID: serviceID}, nil
+	return &Tracker{ServiceID: serviceID}, nil
 }
 
-func (t *tracker) Track(accountID, accountName, userName, activity, module string) (*http.Response, error) {
+func (t *Tracker) Track(accountID, accountName, userName, activity, module string) (*http.Response, error) {
 	r := &request{
 		accountID:   accountID,
 		accountName: accountName,
@@ -81,18 +79,17 @@ func (t *tracker) Track(accountID, accountName, userName, activity, module strin
 	return http.Get(t.getURL(r))
 }
 
-func (t *tracker) TrackAttribute(accountID, userName, name, value string) (*http.Response, error) {
+func (t *Tracker) TrackAttribute(accountID, userName, name, value string) (*http.Response, error) {
 	r := &request{
-		accountID: accountID,
-		userName:  userName,
-		name:      name,
-		value:     value,
+		accountID:  accountID,
+		userName:   userName,
+		attributes: map[string]string{name: val},
 	}
 
 	return http.Get(t.getURL(r))
 }
 
-func (t *tracker) TrackAttributes(accountID, userName string, attributes map[string]string) (*http.Response, error) {
+func (t *Tracker) TrackAttributes(accountID, userName string, attributes map[string]string) (*http.Response, error) {
 	r := &request{
 		accountID:  accountID,
 		userName:   userName,
