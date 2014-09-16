@@ -51,7 +51,7 @@ func (r *request) String() string {
 }
 
 type Tracker struct {
-	ServiceID string
+	serviceID string
 }
 
 // Construct a Totango API request from a request type
@@ -64,7 +64,7 @@ func NewTracker(serviceID string) (*Tracker, error) {
 		return nil, errors.New("Tracker requires a valid Totango Service ID")
 	}
 
-	return &Tracker{ServiceID: serviceID}, nil
+	return &Tracker{serviceID: serviceID}, nil
 }
 
 func (t *Tracker) Track(accountID, accountName, userName, activity, module string) (*http.Response, error) {
