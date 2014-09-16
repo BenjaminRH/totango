@@ -4,14 +4,12 @@ Library for the Totango [server integration API](http://help.totango.com/install
 
 ## Example
 
-This example is available at http://play.golang.org/p/pgc709-CnQ
+This example is available at http://play.golang.org/p/mzbdgg6kzD
 
 ```go
 package main
 
-import (
-	"github.com/BenjaminRH/totango"
-)
+import "github.com/BenjaminRH/totango"
 
 func main() {
 	tracker, _ := totango.NewTracker("SP-XXXX-YY")
