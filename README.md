@@ -4,7 +4,7 @@ Library for the Totango [server integration API](http://help.totango.com/install
 
 ## Example
 
-This example is available at http://play.golang.org/p/bj2zod0fJa
+This example is available at http://play.golang.org/p/pgc709-CnQ
 
 ```go
 package main
@@ -19,8 +19,11 @@ func main() {
 	// Track a new event
 	tracker.Track("account123", "userbob@example.com", "User Bob", "Some Activity", "A Module")
 	
-	// Now update an attribute
-	tracker.TrackAttribute("account123", "userbob@example.com", "Some Attribute", "The Value")
+	// Now update an account attribute
+	tracker.TrackAttribute("account123", "", "Some Attribute", "The Value")
+	
+	// Or update a user attribute
+	tracker.TrackAttribute("account123", "userbob@example.com", "Foo", "Bar")
 	
 	// How about multiple attributes?
 	tracker.TrackAttributes("account123", "userbob@example.com", map[string]string{
