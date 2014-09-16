@@ -56,7 +56,7 @@ type Tracker struct {
 
 // Construct a Totango API request from a request type
 func (t *Tracker) getURL(r *request) string {
-	return baseURL + t.ServiceID + r.String()
+	return baseURL + t.serviceID + r.String()
 }
 
 func NewTracker(serviceID string) (*Tracker, error) {
@@ -83,7 +83,7 @@ func (t *Tracker) TrackAttribute(accountID, userName, name, value string) (*http
 	r := &request{
 		accountID:  accountID,
 		userName:   userName,
-		attributes: map[string]string{name: val},
+		attributes: map[string]string{name: value},
 	}
 
 	return http.Get(t.getURL(r))
